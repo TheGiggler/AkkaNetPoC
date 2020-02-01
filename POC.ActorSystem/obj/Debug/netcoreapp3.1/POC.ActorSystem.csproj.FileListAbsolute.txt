@@ -1,0 +1,7 @@
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\bin\Debug\netcoreapp3.1\POC.ActorSystem.exe
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\obj\Debug\netcoreapp3.1\POC.ActorSystem.csprojAssemblyReference.cache
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\obj\Debug\netcoreapp3.1\POC.ActorSystem.AssemblyInfoInputs.cache
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\obj\Debug\netcoreapp3.1\POC.ActorSystem.AssemblyInfo.cs
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\bin\Debug\netcoreapp3.1\Akka.dll
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\mctoc\source\repos\POC.ActorSystem\POC.ActorSystem\obj\Debug\netcoreapp3.1\POC.ActorSystem.csproj.CopyComplete
