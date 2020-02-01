@@ -4,7 +4,7 @@ using System.Text;
 
 namespace POC.ActorSystem.Messages
 {
-    class TooBusyCallBack
+    public class TooBusyCallBack
     {
     }
 }
