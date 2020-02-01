@@ -4,6 +4,7 @@ using POC.ActorSystem.Messages;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace POC.ActorSystem.Actors
 {
@@ -28,43 +29,57 @@ namespace POC.ActorSystem.Actors
         private void Ready()
         {
             log.Info("WorkerActor became Ready");
-
-            Receive<DoSomeWork>(_ =>
+            
+            Receive<DoSomeWork>(m =>
             {
                 Stash.UnstashAll();
-
-                log.Info("WorkerActor received DoSomeWork");
                 Become(Processing);
+                Self.Tell(m);
+
             });
 
 
         }
 
-        private void Processing() 
-        { 
-            log.Info("WorkerActor became Processing");
-            Receive<GiveUp>(x =>
+        private void Processing()
+        {
+            Receive<DoSomeWork>(m =>
             {
-                log.Info("WorkerActor received GiveUp");
-                Become(Ready);
-            });
-
-            Receive<DoSomeWork>(_ =>
-            {
+                log.Info($"WorkerActor processing DoSomeWork {m.WorkID}");
                 BecomeStacked(() =>
                 {
-
                     Receive<DoSomeWork>(_ => Stash.Stash());
+                    DoSomeWork(m);
+                    log.Info($"WorkerActor finished processing DoSomeWork {m.WorkID}");
+
+                    Context.UnbecomeStacked();
+                    //Become(Ready);
+
                 });
-
-
             });
 
-            //simulate work
-            System.Threading.Thread.Sleep(2000);
-            //work is done
-            Become(Ready);
-        }
+            Receive<GiveUp>(m =>
+            {
+                //stop processing this work id
+            });
+                //Stash.UnstashAll();
 
+                //log.Info($"WorkerActor received DoSomeWork {m.WorkID}");
+                //BecomeStacked(() =>
+                //{
+                //    ReceiveAny(_ => Stash.Stash());
+
+
+                //});
+                //log.Info($"Processing WorkId {m.WorkID}");
+                //System.Threading.Thread.Sleep(3000); //fake i/o work 
+                //log.Info($"Done processing WorkId {m.WorkID}");
+            }
+
+        private void DoSomeWork(DoSomeWork m)
+        {
+            log.Info($"DoSomeWork WorkId {m.WorkID}");
+            System.Threading.Thread.Sleep(2500);
+        }
     }
 }
