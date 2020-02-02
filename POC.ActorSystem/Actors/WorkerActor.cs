@@ -15,11 +15,8 @@ namespace POC.ActorSystem.Actors
         public IStash Stash { get; set; }
 
         public WorkerActor()
-        {
-
-            Ready();
-
-
+        {           
+            Ready();//ready to receive work requests
         }
 
         //protected override void PreStart()
@@ -32,8 +29,8 @@ namespace POC.ActorSystem.Actors
             log.Info($"WorkerActor became Ready at {DateTime.Now.ToLongTimeString()}");
              Receive<DoSomeWork>(m =>
             {
-               // CurrentMessage = m;
-                Become(Blocked);
+                
+                Become(Blocked);//block and process this request
                 Self.Tell(new DoCurrentWork() { Work = m });
               
             });
@@ -44,12 +41,13 @@ namespace POC.ActorSystem.Actors
         private void Blocked()
         {
 
-            Receive<DoSomeWork>(m2 => { Stash.Stash(); log.Info($"Blocked Stashing WorkId {m2.WorkID} at {DateTime.Now.ToLongTimeString()}"); });
+            Receive<DoSomeWork>(m => { Stash.Stash(); log.Info($"Blocked Stashing WorkId {m.WorkID} at {DateTime.Now.ToLongTimeString()}"); });
             Receive<DoCurrentWork>(m=>
             {
                 DoSomeWork work = m.Work;
+                DoTheWork(work);
                 log.Info($"WorkerActor finished processing DoSomeWork {work.WorkID} at {DateTime.Now.ToLongTimeString()}");
-                Become(Ready);
+                Become(Ready);//unblock and process first stashed request
                 Stash.Unstash();
 
             });
@@ -59,44 +57,12 @@ namespace POC.ActorSystem.Actors
             return;
 
         }
-        //private void Processing()
-        //{
-        //    Receive<DoSomeWork>(m =>
-        //    {
-        //        log.Info($"WorkerActor processing DoSomeWork {m.WorkID}");
-        //        BecomeStacked(() =>
-        //        {
-
-        //            UnbecomeStacked();
-
-        //            Become(Ready);
-        //            Stash.UnstashAll();
-
-        //        });
-        //    });
-
-        //    Receive<GiveUp>(m =>
-        //    {
-        //        //stop processing this work id
-        //    });
-        //        //Stash.UnstashAll();
-
-        //        //log.Info($"WorkerActor received DoSomeWork {m.WorkID}");
-        //        //BecomeStacked(() =>
-        //        //{
-        //        //    ReceiveAny(_ => Stash.Stash());
 
 
-        //        //});
-        //        //log.Info($"Processing WorkId {m.WorkID}");
-        //        //System.Threading.Thread.Sleep(3000); //fake i/o work 
-        //        //log.Info($"Done processing WorkId {m.WorkID}");
-        //    }
-
-        private void DoSomeWork(DoSomeWork m)
+        private void DoTheWork(DoSomeWork m)
         {
-            log.Info($"DoSomeWork WorkId {m.WorkID}");
-            System.Threading.Thread.Sleep(2500);
+            log.Info($"DoTheWork WorkId {m.WorkID}");
+            System.Threading.Thread.Sleep(2500); //simulate i/o latency
         }
     }
 }
