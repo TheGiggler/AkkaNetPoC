@@ -4,7 +4,7 @@ using System.Text;
 
 namespace POC.ActorSystem.Messages
 {
-    public class KeepTrying
+    public class KeepTrying : IMessage
     {
     }
 }

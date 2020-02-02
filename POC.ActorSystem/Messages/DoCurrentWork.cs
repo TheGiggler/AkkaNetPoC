@@ -4,7 +4,8 @@ using System.Text;
 
 namespace POC.ActorSystem.Messages
 {
-    public class TooBusyCallBack : IMessage
-    {
+    public class DoCurrentWork
+    {   
+        public DoSomeWork Work { get; set; }
     }
 }

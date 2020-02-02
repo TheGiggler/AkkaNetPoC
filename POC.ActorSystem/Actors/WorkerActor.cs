@@ -13,6 +13,7 @@ namespace POC.ActorSystem.Actors
         private readonly ILoggingAdapter log = Context.GetLogger();
 
         public IStash Stash { get; set; }
+
         public WorkerActor()
         {
 
@@ -28,53 +29,69 @@ namespace POC.ActorSystem.Actors
         //}
         private void Ready()
         {
-            log.Info("WorkerActor became Ready");
-            
-            Receive<DoSomeWork>(m =>
+            log.Info($"WorkerActor became Ready at {DateTime.Now.ToLongTimeString()}");
+             Receive<DoSomeWork>(m =>
             {
-                Stash.UnstashAll();
-                Become(Processing);
-                Self.Tell(m);
-
+               // CurrentMessage = m;
+                Become(Blocked);
+                Self.Tell(new DoCurrentWork() { Work = m });
+              
             });
 
 
         }
 
-        private void Processing()
+        private void Blocked()
         {
-            Receive<DoSomeWork>(m =>
+
+            Receive<DoSomeWork>(m2 => { Stash.Stash(); log.Info($"Blocked Stashing WorkId {m2.WorkID} at {DateTime.Now.ToLongTimeString()}"); });
+            Receive<DoCurrentWork>(m=>
             {
-                log.Info($"WorkerActor processing DoSomeWork {m.WorkID}");
-                BecomeStacked(() =>
-                {
-                    Receive<DoSomeWork>(_ => Stash.Stash());
-                    DoSomeWork(m);
-                    log.Info($"WorkerActor finished processing DoSomeWork {m.WorkID}");
+                DoSomeWork work = m.Work;
+                log.Info($"WorkerActor finished processing DoSomeWork {work.WorkID} at {DateTime.Now.ToLongTimeString()}");
+                Become(Ready);
+                Stash.Unstash();
 
-                    Context.UnbecomeStacked();
-                    //Become(Ready);
-
-                });
             });
 
-            Receive<GiveUp>(m =>
-            {
-                //stop processing this work id
-            });
-                //Stash.UnstashAll();
 
-                //log.Info($"WorkerActor received DoSomeWork {m.WorkID}");
-                //BecomeStacked(() =>
-                //{
-                //    ReceiveAny(_ => Stash.Stash());
+            log.Info($"Blocked returning at {DateTime.Now.ToLongTimeString()}");
+            return;
+
+        }
+        //private void Processing()
+        //{
+        //    Receive<DoSomeWork>(m =>
+        //    {
+        //        log.Info($"WorkerActor processing DoSomeWork {m.WorkID}");
+        //        BecomeStacked(() =>
+        //        {
+
+        //            UnbecomeStacked();
+
+        //            Become(Ready);
+        //            Stash.UnstashAll();
+
+        //        });
+        //    });
+
+        //    Receive<GiveUp>(m =>
+        //    {
+        //        //stop processing this work id
+        //    });
+        //        //Stash.UnstashAll();
+
+        //        //log.Info($"WorkerActor received DoSomeWork {m.WorkID}");
+        //        //BecomeStacked(() =>
+        //        //{
+        //        //    ReceiveAny(_ => Stash.Stash());
 
 
-                //});
-                //log.Info($"Processing WorkId {m.WorkID}");
-                //System.Threading.Thread.Sleep(3000); //fake i/o work 
-                //log.Info($"Done processing WorkId {m.WorkID}");
-            }
+        //        //});
+        //        //log.Info($"Processing WorkId {m.WorkID}");
+        //        //System.Threading.Thread.Sleep(3000); //fake i/o work 
+        //        //log.Info($"Done processing WorkId {m.WorkID}");
+        //    }
 
         private void DoSomeWork(DoSomeWork m)
         {

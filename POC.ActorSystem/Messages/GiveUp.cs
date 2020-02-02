@@ -4,7 +4,8 @@ using System.Text;
 
 namespace POC.ActorSystem.Messages
 {
-    class GiveUp
+    public class GiveUp:IMessage
     {
+    
     }
 }
