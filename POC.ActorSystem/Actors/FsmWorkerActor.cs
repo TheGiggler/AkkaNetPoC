@@ -15,18 +15,23 @@ namespace POC.ActorSystem.Actors
         private readonly ILoggingAdapter log = Context.GetLogger();
         public IStash Stash { get; set; }
 
+        protected override bool Receive(object message)
+        {
+            return base.Receive(message);
+        }
         public FsmWorkerActor()
         {
-            StartWith(State.Ready, null);
+            StartWith(State.Ready, Uninitialized.Instance);
 
             When(State.Ready, @event =>
             {
-                var s = StateData;
+                var s = @event.StateData;
                 var n = StateName;
                 if (@event.FsmEvent is NewWorkArrived)
                 {
                     var id = ((NewWorkArrived)@event.FsmEvent).WorkId;
-                    return GoTo(State.Blocked);
+                    
+                    return GoTo(State.Blocked).Using(new WorkOrder(id));
 
 
                 }
@@ -70,7 +75,7 @@ namespace POC.ActorSystem.Actors
             //    }
 
             //});
-            
+
             OnTransition((initialState, nextState) =>
             {
                 if (initialState == State.Blocked && nextState == State.Ready)
@@ -80,11 +85,8 @@ namespace POC.ActorSystem.Actors
 
                 if (initialState == State.Ready && nextState == State.Blocked)
                 {
-                   
-                    log.Info("Blocking");
-                
-
-
+                    log.Info("Blocking and Processing");
+                    Process((WorkOrder)StateData);
                 }
 
             });
@@ -92,7 +94,7 @@ namespace POC.ActorSystem.Actors
 
         }
 
-        private State<State,IData> Process(WorkOrder workOrder)
+        private State<State, IData> Process(WorkOrder workOrder)
         {
 
             log.Info($"Processing WorkOrder {workOrder.WorkId}");
