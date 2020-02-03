@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POC.ActorSystem.Events
+namespace POC.ActorSystem.Data
 {
-    public interface IEvent
+    public interface IData
     {
     }
 }

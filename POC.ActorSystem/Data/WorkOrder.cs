@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POC.ActorSystem.Events
+namespace POC.ActorSystem.Data
 {
-    public class NewWorkArrived
+    public class WorkOrder:IData
     {
-        public NewWorkArrived(int workId)
+        public WorkOrder(int workId)
         {
             this.WorkId = workId;
         }
-        public int WorkId {get;}
+
+        public int WorkId { get; }
     }
 }

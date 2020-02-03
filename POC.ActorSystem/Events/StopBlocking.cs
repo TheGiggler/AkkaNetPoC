@@ -4,8 +4,12 @@ using System.Text;
 
 namespace POC.ActorSystem.Events
 {
-    public class WorkFinished:IEvent
+    public class StopBlocking
     {
-        public int WorkID { get; set; }
+        public StopBlocking()
+        {
+            
+        }
+
     }
 }

@@ -4,7 +4,9 @@ using System.Text;
 
 namespace POC.ActorSystem.States
 {
-    public interface IState
+    public enum State
     {
+        Ready = 0,
+        Blocked = 1
     }
 }
