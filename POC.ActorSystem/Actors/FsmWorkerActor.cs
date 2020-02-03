@@ -15,10 +15,7 @@ namespace POC.ActorSystem.Actors
         private readonly ILoggingAdapter log = Context.GetLogger();
         public IStash Stash { get; set; }
 
-        protected override bool Receive(object message)
-        {
-            return base.Receive(message);
-        }
+
         public FsmWorkerActor()
         {
             StartWith(State.Ready, Uninitialized.Instance);
@@ -55,7 +52,7 @@ namespace POC.ActorSystem.Actors
                 if (@event.FsmEvent is NewWorkArrived)
                 {
                     Stash.Stash();  //stash until ready
-                    log.Info("Stashed");
+                    log.Info($"Stashed WorkID({((NewWorkArrived)@event.FsmEvent).WorkId})");
                     return Stay();
                 }
 
@@ -85,8 +82,8 @@ namespace POC.ActorSystem.Actors
 
                 if (initialState == State.Ready && nextState == State.Blocked)
                 {
-                    log.Info("Blocking and Processing");
-                    Process((WorkOrder)StateData);
+                    log.Info($"Blocking and Processing WorkID {((WorkOrder)NextStateData).WorkId}");
+                    Process((WorkOrder)NextStateData);
                 }
 
             });
@@ -94,12 +91,14 @@ namespace POC.ActorSystem.Actors
 
         }
 
-        private State<State, IData> Process(WorkOrder workOrder)
+        private void Process(WorkOrder workOrder)
         {
 
             log.Info($"Processing WorkOrder {workOrder.WorkId}");
-            Task.Delay(2000);
-            return GoTo(State.Ready);
+            System.Threading.Thread.Sleep(2000);
+            log.Info($"Finished processing WorkOrder {workOrder.WorkId}");
+            Self.Tell(new StopBlocking());
+           // return GoTo(State.Ready);
         }
     }
 }

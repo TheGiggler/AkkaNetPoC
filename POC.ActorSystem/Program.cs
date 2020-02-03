@@ -23,7 +23,7 @@ namespace POC.ActorSystem
             worker.Tell(new NewWorkArrived(1));
             worker.Tell(new NewWorkArrived(2));
             worker.Tell(new NewWorkArrived(3));
-            worker.Tell(new StopBlocking());
+           // worker.Tell(new StopBlocking());
             while (1 == 1)
             {
             }
