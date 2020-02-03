@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj": {}
+    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\AkkaNET.POC\\AkkaNET.POC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj": {
+    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\AkkaNET.POC\\AkkaNET.POC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj",
+        "projectUniqueName": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\AkkaNET.POC\\AkkaNET.POC.csproj",
         "projectName": "AkkaNET.POC",
-        "projectPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj",
+        "projectPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\AkkaNET.POC\\AkkaNET.POC.csproj",
         "packagesPath": "C:\\Users\\mtocci\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\obj\\",
+        "outputPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\AkkaNET.POC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
