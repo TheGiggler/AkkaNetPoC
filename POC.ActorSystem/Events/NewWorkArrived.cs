@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POC.ActorSystem.Events
+namespace AkkaNET.POC.Events
 {
     public class NewWorkArrived
     {

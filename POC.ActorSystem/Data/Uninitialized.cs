@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POC.ActorSystem.Data
+namespace AkkaNET.POC.Data
 {
     public class Uninitialized : IData
     {

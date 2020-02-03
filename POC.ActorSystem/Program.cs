@@ -1,9 +1,9 @@
 ﻿using System;
 using Akka.Actor;
-using POC.ActorSystem.Actors;
-using POC.ActorSystem.Data;
-using POC.ActorSystem.Events;
-using POC.ActorSystem.Messages;
+using AkkaNET.POC.Actors;
+using AkkaNET.POC.Data;
+using AkkaNET.POC.Events;
+using AkkaNET.POC.Messages;
 
 namespace POC.ActorSystem
 {

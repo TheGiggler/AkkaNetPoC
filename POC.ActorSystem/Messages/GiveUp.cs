@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POC.ActorSystem.Messages
+namespace AkkaNET.POC.Messages
 {
     public class GiveUp:IMessage
     {

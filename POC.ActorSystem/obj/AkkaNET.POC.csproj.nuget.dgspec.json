@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\POC.ActorSystem.csproj": {}
+    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\POC.ActorSystem.csproj": {
+    "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\POC.ActorSystem.csproj",
-        "projectName": "POC.ActorSystem",
-        "projectPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\POC.ActorSystem.csproj",
+        "projectUniqueName": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj",
+        "projectName": "AkkaNET.POC",
+        "projectPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\AkkaNET.POC.csproj",
         "packagesPath": "C:\\Users\\mtocci\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\mtocci\\source\\repos\\AkkaNetPoC\\POC.ActorSystem\\obj\\",
         "projectStyle": "PackageReference",

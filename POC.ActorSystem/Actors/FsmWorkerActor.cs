@@ -4,11 +4,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Event;
-using POC.ActorSystem.Data;
-using POC.ActorSystem.Events;
-using POC.ActorSystem.States;
+using AkkaNET.POC.Data;
+using AkkaNET.POC.Events;
+using AkkaNET.POC.States;
 
-namespace POC.ActorSystem.Actors
+namespace AkkaNET.POC.Actors
 {
     public class FsmWorkerActor : FSM<State, IData>, IWithUnboundedStash
     {

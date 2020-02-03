@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace POC.ActorSystem.States
+namespace AkkaNET.POC.States
 {
     public enum State
     {

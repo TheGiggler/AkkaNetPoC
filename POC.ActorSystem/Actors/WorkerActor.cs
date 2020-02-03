@@ -1,12 +1,12 @@
 ﻿using Akka.Actor;
 using Akka.Event;
-using POC.ActorSystem.Messages;
+using AkkaNET.POC.Messages;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POC.ActorSystem.Actors
+namespace AkkaNET.POC.Actors
 {
     public class WorkerActor : ReceiveActor, IWithUnboundedStash
     {
